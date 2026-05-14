@@ -1,59 +1,123 @@
-# AI-Powered eCRM Email Automation Assistant
+# 🚀 AI-Powered eCRM Email Automation Assistant
 
-An AI-powered eCRM support automation system that streamlines customer communication workflows using Large Language Models (LLMs), agentic AI workflows, and API integrations. The system intelligently manages customer queries, generates contextual responses, prioritizes support requests, and automates email-based communication processes to improve customer support efficiency.
+An intelligent AI-driven eCRM automation platform that streamlines customer communication workflows using Large Language Models (LLMs), Agentic AI, LangGraph orchestration, and API integrations.
+
+The system automates customer query handling, generates contextual responses, prioritizes support requests, and improves customer support efficiency through multi-step AI workflows.
 
 ---
 
-# 🚀 Features
+# 📌 Project Overview
 
-- Intelligent customer query classification
-- AI-generated contextual email responses
-- Automated support workflow management
-- Customer request prioritization
-- Multi-step agentic workflow execution
-- REST API integration for external services
-- Scalable backend architecture
-- Vector-based contextual retrieval using Pinecone
-- Real-time support assistance automation
-- Secure and modular API-driven design
+This project demonstrates the implementation of an AI-powered customer support automation system capable of:
+
+- Understanding customer queries
+- Classifying support requests
+- Retrieving contextual information
+- Generating intelligent AI responses
+- Prioritizing support tickets
+- Managing automated workflows
+- Logging customer interactions
+
+The project is designed using modern AI Engineering practices and production-style architecture.
+
+---
+
+# ✨ Key Features
+
+## 🤖 AI-Powered Query Handling
+- Intelligent customer query understanding
+- LLM-based response generation
+- Context-aware support automation
+
+---
+
+## 🧠 Agentic AI Workflow
+- Multi-step LangGraph orchestration
+- State-based workflow management
+- Modular AI agent architecture
+
+---
+
+## 📩 Smart Email Automation
+- Automated customer response generation
+- Support request prioritization
+- Automated workflow execution
+
+---
+
+## 🔍 Context Retrieval System
+- Pinecone vector database integration
+- Similar query retrieval
+- Knowledge-based contextual support
+
+---
+
+## ⚡ Backend API System
+- FastAPI-powered backend
+- REST API integration
+- Modular API architecture
+
+---
+
+## 🗄️ Database Integration
+- MongoDB-based storage
+- Customer interaction history
+- AI response logging
 
 ---
 
 # 🧠 System Architecture
 
-The system uses an agentic AI workflow powered by LangGraph and LangChain.
+The system uses a modular AI workflow architecture powered by LangGraph and LangChain.
 
-### Workflow Pipeline
+---
 
-1. Customer email/query received
-2. Query classification using LLM
-3. Context retrieval from vector database
-4. AI-generated response generation
-5. Support priority assignment
-6. Automated workflow execution
-7. Response delivery and logging
+# 🔄 Workflow Pipeline
+
+```text
+Customer Query
+      ↓
+Query Classification Agent
+      ↓
+Context Retrieval Agent
+      ↓
+LLM Response Generation Agent
+      ↓
+Priority Assignment Agent
+      ↓
+Workflow Logging & Database Storage
+      ↓
+Final AI Response
+```
 
 ---
 
 # 🛠️ Tech Stack
 
-## Programming Language
+## 👨‍💻 Programming Language
 - Python
 
-## AI & LLM Frameworks
+---
+
+## 🤖 AI & LLM Frameworks
 - LangChain
 - LangGraph
 - OpenAI API
 
-## Backend & APIs
-- FastAPI
-- REST APIs
+---
 
-## Database & Storage
+## ⚡ Backend Framework
+- FastAPI
+
+---
+
+## 🗄️ Databases
 - MongoDB
 - Pinecone Vector Database
 
-## Tools & Platforms
+---
+
+## 🔧 Tools & Platforms
 - Git
 - GitHub
 - Postman
@@ -64,21 +128,52 @@ The system uses an agentic AI workflow powered by LangGraph and LangChain.
 # 📂 Project Structure
 
 ```bash
-AI-eCRM-Email-Automation/
+AI-Powered-eCRM-Email-Automation-Assistant/
 │
 ├── backend/
 │   ├── agents/
-│   ├── workflows/
+│   │   ├── classifier_agent.py
+│   │   ├── retrieval_agent.py
+│   │   ├── response_agent.py
+│   │   └── priority_agent.py
+│   │
 │   ├── api/
+│   │   ├── routes.py
+│   │   └── schemas.py
+│   │
+│   ├── database/
+│   │   ├── mongodb.py
+│   │   └── pinecone_db.py
+│   │
 │   ├── prompts/
-│   └── utils/
-│
-├── database/
+│   │   ├── classifier_prompt.py
+│   │   └── response_prompt.py
+│   │
+│   ├── services/
+│   │   ├── email_service.py
+│   │   └── workflow_service.py
+│   │
+│   ├── utils/
+│   │   ├── logger.py
+│   │   └── helpers.py
+│   │
+│   ├── workflows/
+│   │   └── langgraph_workflow.py
+│   │
+│   └── __init__.py
 │
 ├── frontend/
+│   ├── static/
+│   ├── templates/
+│   └── app.py
 │
-├── requirements.txt
+├── tests/
+│
+├── .env.example
+├── .gitignore
 ├── app.py
+├── main.py
+├── requirements.txt
 └── README.md
 ```
 
@@ -86,36 +181,45 @@ AI-eCRM-Email-Automation/
 
 # ⚙️ Installation & Setup
 
-## 1️⃣ Clone the Repository
+## 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/your-username/AI-eCRM-Email-Automation.git
-cd AI-eCRM-Email-Automation
+git clone https://github.com/your-username/AI-Powered-eCRM-Email-Automation-Assistant.git
 ```
 
 ---
 
-## 2️⃣ Create Virtual Environment
+## 2️⃣ Navigate to Project Directory
+
+```bash
+cd AI-Powered-eCRM-Email-Automation-Assistant
+```
+
+---
+
+## 3️⃣ Create Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-### Activate Environment
+---
 
-#### Windows
+## 4️⃣ Activate Virtual Environment
+
+### Windows
 ```bash
 venv\Scripts\activate
 ```
 
-#### Linux / Mac
+### Linux / Mac
 ```bash
 source venv/bin/activate
 ```
 
 ---
 
-## 3️⃣ Install Dependencies
+## 5️⃣ Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -123,25 +227,25 @@ pip install -r requirements.txt
 
 ---
 
-## 4️⃣ Configure Environment Variables
+## 6️⃣ Configure Environment Variables
 
 Create a `.env` file:
 
 ```env
-OPENAI_API_KEY=your_api_key
+OPENAI_API_KEY=your_openai_api_key
 MONGODB_URI=your_mongodb_uri
-PINECONE_API_KEY=your_pinecone_key
+PINECONE_API_KEY=your_pinecone_api_key
 ```
 
 ---
 
-## 5️⃣ Run the Application
+## 7️⃣ Run Application
 
 ```bash
 python app.py
 ```
 
-or
+OR
 
 ```bash
 uvicorn app:app --reload
@@ -149,77 +253,130 @@ uvicorn app:app --reload
 
 ---
 
-# 📊 Use Cases
+# 📡 API Endpoints
 
-- Customer support automation
-- Smart email response generation
-- eCRM workflow management
-- Automated support ticket prioritization
-- AI-powered business communication
-- Enterprise customer engagement systems
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/query` | Submit customer query |
+| GET | `/history/{customer_id}` | Fetch interaction history |
+| GET | `/health` | Health check endpoint |
+
+---
+
+# 🧪 Example Workflow
+
+## 📥 Input Query
+
+```text
+"I have not received my order confirmation email."
+```
+
+---
+
+## ⚙️ AI Workflow Execution
+
+- Detect customer issue
+- Retrieve contextual support information
+- Generate intelligent AI response
+- Assign support priority
+- Store workflow logs
+- Trigger automated follow-up
+
+---
+
+## 📤 AI Generated Response
+
+```text
+"We apologize for the inconvenience. Your order is currently being processed and the confirmation email will be sent shortly."
+```
 
 ---
 
 # 🔐 Security Features
 
-- Secure API communication
+- Secure API handling
 - Environment variable protection
-- Authentication-ready backend architecture
-- Modular workflow management
-- Controlled LLM prompt handling
+- Controlled prompt execution
+- Modular workflow isolation
+- Backend validation system
+
+---
+
+# 📊 Use Cases
+
+- AI-powered customer support automation
+- Smart eCRM communication systems
+- Automated support ticket handling
+- Enterprise workflow automation
+- Intelligent customer engagement systems
 
 ---
 
 # 📈 Future Enhancements
 
 - Multi-agent collaborative workflows
-- Voice-based support integration
-- Sentiment analysis for customer queries
-- Dashboard analytics for support teams
-- Human-in-the-loop approval workflows
+- Human-in-the-loop support approval
+- Sentiment analysis integration
+- Email provider integration
+- Dashboard analytics
 - LangSmith observability integration
-
----
-
-# 🧪 Example Workflow
-
-### Input Query
-> "I have not received my order confirmation email."
-
-### AI Workflow
-- Detect customer issue
-- Retrieve contextual support information
-- Generate personalized response
-- Assign support priority
-- Trigger automated follow-up workflow
-
-### Generated Response
-> "We apologize for the inconvenience. Your order is currently being processed and the confirmation email will be sent shortly."
+- Voice-based support system
 
 ---
 
 # 🎯 Learning Outcomes
 
-This project helped in understanding:
-- Agentic AI systems
-- LLM orchestration
-- Prompt engineering
-- API integration workflows
-- Vector databases and retrieval systems
-- AI-powered customer support automation
-- Scalable backend development
+This project demonstrates practical implementation of:
+
+- Agentic AI Systems
+- LangGraph Workflow Orchestration
+- LLM-based Automation
+- Prompt Engineering
+- Vector Database Retrieval
+- REST API Development
+- Backend System Design
+- AI Workflow Engineering
 
 ---
 
-# 👨‍💻 Author
+# 🌟 Project Highlights
 
-### Saurabh Mali
-
-Computer Engineering Student | AI & Generative AI Enthusiast
-
-- LinkedIn
-- GitHub
+✔ Production-style architecture  
+✔ Resume-worthy AI Engineering project  
+✔ Real-world customer support simulation  
+✔ Hands-on LangGraph implementation  
+✔ AI-powered automation workflows  
+✔ Modular backend development  
 
 ---
 
-# ⭐ If you found this project useful, consider giving it a star!
+# 🧹 Recommended .gitignore
+
+```bash
+venv/
+__pycache__/
+.env
+*.pyc
+.vscode/
+.idea/
+```
+
+---
+
+# 📦 requirements.txt Example
+
+```txt
+fastapi
+uvicorn
+langchain
+langgraph
+openai
+pymongo
+pinecone-client
+python-dotenv
+requests
+```
+
+---
+
+# ⭐ Star this repository if you found it useful!
