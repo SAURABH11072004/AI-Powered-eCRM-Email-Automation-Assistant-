@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>eCRM AI Support</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+  header { background: #1e3a5f; color: #fff; padding: 18px 32px; display: flex; align-items: center; gap: 12px; }
+  header h1 { font-size: 1.3rem; }
+  .container { max-width: 800px; margin: 40px auto; padding: 0 16px; }
+  .card { background: #fff; border-radius: 12px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 24px; }
+  label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.9rem; }
+  input, textarea { width: 100%; padding: 10px 14px; border: 1px solid #d0d7e2; border-radius: 8px; font-size: 0.95rem; margin-bottom: 16px; }
+  textarea { height: 110px; resize: vertical; }
+  button { background: #1e3a5f; color: #fff; border: none; padding: 11px 28px; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
+  button:hover { background: #2c5282; }
+  button:disabled { background: #9ab; cursor: not-allowed; }
+  #result { display: none; }
+  .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; margin-bottom: 12px; }
+  .High   { background: #fee2e2; color: #b91c1c; }
+  .Medium { background: #fef9c3; color: #92400e; }
+  .Low    { background: #d1fae5; color: #065f46; }
+  .category-tag { background: #e0e7ff; color: #3730a3; padding: 4px 10px; border-radius: 16px; font-size: 0.82rem; font-weight: 600; margin-left: 8px; }
+  .response-box { background: #f8fafc; border-left: 4px solid #1e3a5f; padding: 14px 18px; border-radius: 6px; line-height: 1.7; }
+  .logs { margin-top: 16px; }
+  .log-item { font-size: 0.82rem; color: #64748b; padding: 3px 0; border-bottom: 1px solid #f1f5f9; }
+  .error { background: #fee2e2; color: #b91c1c; padding: 12px; border-radius: 8px; }
+  .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin 0.7s linear infinite; margin-right: 8px; vertical-align: middle; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<header>
+  <span style="font-size:1.6rem">🤖</span>
+  <h1>AI-Powered eCRM Email Automation Assistant</h1>
+</header>
+
+<div class="container">
+  <div class="card">
+    <label for="custId">Customer ID</label>
+    <input id="custId" placeholder="e.g. CUST001" value="CUST001"/>
+
+    <label for="msg">Your Message</label>
+    <textarea id="msg" placeholder="Describe your issue here..."></textarea>
+
+    <button id="submitBtn" onclick="submitQuery()">Submit Query</button>
+  </div>
+
+  <div class="card" id="result">
+    <h3 style="margin-bottom:14px">AI Response</h3>
+    <div id="badges"></div>
+    <div class="response-box" id="responseText"></div>
+    <div class="logs" id="logsSection">
+      <p style="font-weight:600;font-size:0.85rem;margin:14px 0 6px">Workflow Logs</p>
+      <div id="logsList"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = "http://localhost:8000";
+
+async function submitQuery() {
+  const custId = document.getElementById("custId").value.trim();
+  const msg    = document.getElementById("msg").value.trim();
+  if (!custId || !msg) { alert("Please fill in all fields."); return; }
+
+  const btn = document.getElementById("submitBtn");
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Processing…';
+  document.getElementById("result").style.display = "none";
+
+  try {
+    const res = await fetch(`${API}/query`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ customer_id: custId, message: msg })
+    });
+    if (!res.ok) throw new Error(await res.text());
+    const data = await res.json();
+
+    document.getElementById("badges").innerHTML =
+      `<span class="badge ${data.priority}">${data.priority} Priority</span>
+       <span class="category-tag">${data.category}</span>`;
+    document.getElementById("responseText").textContent = data.response;
+
+    const logsList = document.getElementById("logsList");
+    logsList.innerHTML = "";
+    (data.logs || []).forEach(l => {
+      const d = document.createElement("div");
+      d.className = "log-item";
+      d.textContent = "✓ " + l;
+      logsList.appendChild(d);
+    });
+
+    document.getElementById("result").style.display = "block";
+  } catch (e) {
+    document.getElementById("result").style.display = "block";
+    document.getElementById("result").innerHTML =
+      `<div class="error">Error: ${e.message}</div>`;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Submit Query";
+  }
+}
+</script>
+</body>
+</html>
